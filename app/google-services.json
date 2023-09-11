@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "713268655393",
+    "project_id": "cleantown-4d5da",
+    "storage_bucket": "cleantown-4d5da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713268655393:android:c753fd2414c9b3a5c6ba60",
+        "android_client_info": {
+          "package_name": "elfak.urosh.cleantown"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDz5yLjoGxI-gpZHh0_6_VsAGNRtJaUA_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
