@@ -19,11 +19,13 @@ enum class AuthState {
 
 class AuthViewModel : ViewModel() {
     private val _liveAuthState = MutableLiveData<AuthState>()
+    private var _liveUser = MutableLiveData<User>()
     private val auth = FirebaseAuth.getInstance()
     private val storage = FirebaseStorage.getInstance("gs://cleantown-4d5da.appspot.com")
     private val db =
         FirebaseDatabase.getInstance("https://cleantown-4d5da-default-rtdb.europe-west1.firebasedatabase.app/")
     val authState: LiveData<AuthState> = _liveAuthState
+    val user: LiveData<User> = _liveUser
 
     fun isAuthenticated(): Boolean {
         return auth.currentUser != null
@@ -34,6 +36,12 @@ class AuthViewModel : ViewModel() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     _liveAuthState.value = AuthState.Success
+                    db.reference.child(auth.currentUser!!.uid).get().addOnSuccessListener {
+                        if (it.exists()) {
+                            val user = it.getValue(User::class.java)
+                            _liveUser.value = user!!
+                        }
+                    }
                 } else {
                     _liveAuthState.value = AuthState.Failure
                 }
@@ -60,13 +68,9 @@ class AuthViewModel : ViewModel() {
                                 user["userId"] = userId
                                 user["postedPoints"] = 0
                                 user["eventPoints"] = 0
+                                val currentuser = User(auth.currentUser!!.uid, email.split('@')[0],0, 0, uri.toString() )
+                                _liveUser.value = currentuser
                                 db.reference.child(userId).setValue(user)
-                                    .addOnFailureListener { ex ->
-                                        Log.d(
-                                            "DB",
-                                            ex.message.toString()
-                                        )
-                                    }
                             }
                         }
                         .addOnFailureListener { ex ->

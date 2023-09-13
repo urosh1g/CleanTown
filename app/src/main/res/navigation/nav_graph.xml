@@ -24,6 +24,9 @@
             android:id="@+id/action_fragmentMaps_to_fragmentUsers"
             app:destination="@id/usersFragment"
         ></action>
+        <action
+            android:id="@+id/action_mapsFragment_to_userProfile"
+            app:destination="@id/userProfile" />
     </fragment>
 
     <fragment
@@ -35,5 +38,14 @@
             android:id="@+id/action_fragmentUsers_to_fragmentMaps"
             app:destination="@id/mapsFragment"
             ></action>
+    </fragment>
+    <fragment
+        android:id="@+id/userProfile"
+        android:name="elfak.urosh.cleantown.UserProfile"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile" >
+        <action
+            android:id="@+id/action_userProfile_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
     </fragment>
 </navigation>

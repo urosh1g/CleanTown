@@ -43,7 +43,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 val location = locationResult.lastLocation
                 val userLocation = LatLng(location.latitude, location.longitude)
                 googleMap.clear()
-                googleMap.addMarker(MarkerOptions().position(userLocation).title("User Location"))
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation))
             }
         }
@@ -66,6 +65,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         btnUserList.setOnClickListener {
             navController.navigate(R.id.action_fragmentMaps_to_fragmentUsers)
          }
+         btnProfile.setOnClickListener {
+         navController.navigate(R.id.action_mapsFragment_to_userProfile) }
 
         return view
     }
