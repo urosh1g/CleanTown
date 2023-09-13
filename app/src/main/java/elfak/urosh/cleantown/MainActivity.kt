@@ -1,13 +1,20 @@
 package elfak.urosh.cleantown
 
 import android.Manifest
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.app.ActivityCompat
 import android.os.Bundle
 import android.content.pm.PackageManager
+import android.util.AttributeSet
+import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
+import androidx.navigation.Navigation.findNavController
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,17 +33,27 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermission)
         }
 
-        val auth = FirebaseAuth.getInstance()
-        val fragment: Fragment;
-        if (auth.currentUser == null) {
-            fragment = AuthFragment()
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), locationPermission)
         }
-        else {
-            fragment = MapsFragment()
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), locationPermission)
         }
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment)
-        fragmentTransaction.commit()
+        val navController = findNavController(this, R.id.nav_host_fragment)
+        val user = FirebaseAuth.getInstance().currentUser
+        if( user != null) {
+            navController.navigate(R.id.action_fragmentAuth_to_fragmentMaps)
+        }
+    }
+
+    override fun onCreateView(
+        parent: View?,
+        name: String,
+        context: Context,
+        attrs: AttributeSet
+    ): View? {
+        return super.onCreateView(parent, name, context, attrs)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
