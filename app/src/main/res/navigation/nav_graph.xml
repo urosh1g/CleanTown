@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph.xml">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/authFragment">
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="elfak.urosh.cleantown.AuthFragment"
+        android:label="Auth"
+        tools:layout="@layout/fragment_auth">
+        <action
+            android:id="@+id/action_fragmentAuth_to_fragmentMaps"
+            app:destination="@id/mapsFragment" />
+    </fragment>
 
+    <!-- Fragment B -->
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="elfak.urosh.cleantown.MapsFragment"
+        android:label="Maps"
+        tools:layout="@layout/fragment_maps">
+        <action
+            android:id="@+id/action_fragmentMaps_to_fragmentUsers"
+            app:destination="@id/usersFragment"
+        ></action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="elfak.urosh.cleantown.UserListFragment"
+        android:label="Users"
+        tools:layout="@layout/fragment_user_list">
+        <action
+            android:id="@+id/action_fragmentUsers_to_fragmentMaps"
+            app:destination="@id/mapsFragment"
+            ></action>
+    </fragment>
 </navigation>

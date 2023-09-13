@@ -17,7 +17,7 @@
             android:layout_marginTop="17dp"
             android:layout_marginBottom="46dp"
             android:ems="10"
-            android:inputType="textEmailAddress"
+            android:inputType="none"
             app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
@@ -41,19 +41,19 @@
             android:id="@+id/btnRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
-            android:text="Register"
+            android:layout_marginEnd="89dp"
+            android:layout_marginBottom="24dp"
+            android:text="Registruj se"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+            app:layout_constraintEnd_toStartOf="@+id/btnLogin"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Email"
+            android:text="Korisnicko ime"
             app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="10dp"
-            android:text="Password"
+            android:text="Sifra"
             app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,10 +91,32 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:layout_marginBottom="10dp"
-            android:text="Phone Number"
+            android:text="Broj telefona"
             app:layout_constraintBottom_toTopOf="@+id/editTextPhone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+
+        <Button
+            android:id="@+id/btnPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profilna Slika"
+            app:layout_constraintBottom_toTopOf="@+id/btnRegister"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:text="Prijavi se"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnRegister"
+            app:layout_constraintTop_toBottomOf="@+id/btnPhoto"
+            app:layout_constraintVertical_bias="0.384" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
