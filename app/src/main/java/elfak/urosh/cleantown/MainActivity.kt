@@ -14,6 +14,7 @@ import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation.findNavController
 
 class MainActivity : AppCompatActivity() {
@@ -43,7 +44,8 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(this, R.id.nav_host_fragment)
         val user = FirebaseAuth.getInstance().currentUser
         if( user != null) {
-            navController.navigate(R.id.action_fragmentAuth_to_fragmentMaps)
+            val opts = NavOptions.Builder().setPopUpTo(R.id.authFragment, true).build()
+            navController.navigate(R.id.action_fragmentAuth_to_fragmentMaps, null, opts)
         }
     }
 

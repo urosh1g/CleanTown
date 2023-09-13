@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_mapsFragment_to_userProfile"
             app:destination="@id/userProfile" />
+        <action
+            android:id="@+id/action_mapsFragment_to_addMarker"
+            app:destination="@id/addMarker" />
     </fragment>
 
     <fragment
@@ -46,6 +49,15 @@
         tools:layout="@layout/fragment_user_profile" >
         <action
             android:id="@+id/action_userProfile_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addMarker"
+        android:name="elfak.urosh.cleantown.AddMarker"
+        android:label="fragment_add_marker"
+        tools:layout="@layout/fragment_add_marker" >
+        <action
+            android:id="@+id/action_addMarker_to_mapsFragment"
             app:destination="@id/mapsFragment" />
     </fragment>
 </navigation>

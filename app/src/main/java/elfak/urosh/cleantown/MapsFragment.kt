@@ -14,6 +14,8 @@ import android.annotation.SuppressLint
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 import com.google.android.gms.location.*
@@ -29,6 +31,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
     private lateinit var mapFragment: SupportMapFragment
+    private val locationViewModel: LocationViewModel by activityViewModels()
 
     @SuppressLint("MissingPermission")
     override fun onCreateView(
@@ -41,6 +44,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 val location = locationResult.lastLocation
+                locationViewModel.setLocation(LatLng(location.latitude, location.longitude))
                 val userLocation = LatLng(location.latitude, location.longitude)
                 googleMap.clear()
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation))
@@ -64,9 +68,13 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
         btnUserList.setOnClickListener {
             navController.navigate(R.id.action_fragmentMaps_to_fragmentUsers)
-         }
-         btnProfile.setOnClickListener {
-         navController.navigate(R.id.action_mapsFragment_to_userProfile) }
+        }
+        btnProfile.setOnClickListener {
+            navController.navigate(R.id.action_mapsFragment_to_userProfile)
+        }
+        btnAddMarker.setOnClickListener {
+            navController.navigate(R.id.action_mapsFragment_to_addMarker)
+        }
 
         return view
     }

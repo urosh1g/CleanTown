@@ -5,11 +5,13 @@ enum class MarkerType {
     Other
 }
 
-data class EventMarker(
+data class Marker(
+    val id: String,
     val userId: String,
     val latitude: Double,
     val longitude: Double,
     val title: String,
     val description: String,
-    val type: MarkerType
+    val type: MarkerType,
+    val photo: String
 )
