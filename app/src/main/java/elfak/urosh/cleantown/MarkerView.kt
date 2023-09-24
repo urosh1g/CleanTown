@@ -20,7 +20,6 @@ class MarkerView : Fragment() {
     }
 
     private val userViewModel: UserListViewModel by activityViewModels()
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val markersViewModel: MarkerViewModel by activityViewModels()
     private val viewModel: MarkerViewViewModel by activityViewModels()
 

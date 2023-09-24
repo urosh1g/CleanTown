@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_mapsFragment_to_markerView"
             app:destination="@id/markerView" />
+        <action
+            android:id="@+id/action_mapsFragment_to_filters"
+            app:destination="@id/filters" />
     </fragment>
 
     <fragment
@@ -70,6 +73,15 @@
         tools:layout="@layout/fragment_marker_view" >
         <action
             android:id="@+id/action_markerView_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filters"
+        android:name="elfak.urosh.cleantown.Filters"
+        android:label="fragment_filters"
+        tools:layout="@layout/fragment_filters" >
+        <action
+            android:id="@+id/action_filters_to_mapsFragment"
             app:destination="@id/mapsFragment" />
     </fragment>
 </navigation>
