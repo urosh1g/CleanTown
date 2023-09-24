@@ -66,17 +66,16 @@ class AddMarker : Fragment() {
         val editTitle = view.findViewById<EditText>(R.id.editTitle)
         val editDesc = view.findViewById<EditText>(R.id.editDesc)
         val spinner = view.findViewById<Spinner>(R.id.spinner)
-        //TODO Other points not working
-        when (spinner.getItemAtPosition(spinner.selectedItemPosition).toString()) {
-            "Event" -> markerType = MarkerType.Event
-            else -> markerType = MarkerType.Other
-        }
         val btnSubmit = view.findViewById<Button>(R.id.btnSubmit)
         btnSubmit.setOnClickListener {
-            storage.reference.child("markers").putFile(image).addOnSuccessListener {
+            when (spinner.selectedItem.toString()) {
+                "Event" -> markerType = MarkerType.Event
+                else -> markerType = MarkerType.Other
+            }
+            val markerId = UUID.randomUUID().toString()
+            storage.reference.child("markers").child(markerId).putFile(image).addOnSuccessListener {
                 it.storage.downloadUrl.addOnSuccessListener {
                     val marker = HashMap<String, Any>()
-                    val markerId = UUID.randomUUID().toString()
                     marker["id"] = markerId
                     marker["userId"] = auth.currentUser!!.uid;
                     marker["latitude"] = location.latitude;
@@ -86,23 +85,23 @@ class AddMarker : Fragment() {
                     marker["type"] = markerType.toString()
                     marker["photo"] = it.toString()
                     db.reference.child("markers").child(markerId).setValue(marker)
-                    db.reference.child(auth.currentUser!!.uid).get().addOnSuccessListener {
+                    db.reference.child("users").child(auth.currentUser!!.uid).get().addOnSuccessListener {
                         val user = it.getValue(User::class.java)!!
                         when ( markerType ) {
                             MarkerType.Event -> {
                                 val data = HashMap<String, Any>()
                                 data["eventPoints"] = user.eventPoints + 5;
-                                db.reference.child(auth.currentUser!!.uid).updateChildren(data)
+                                db.reference.child("users").child(auth.currentUser!!.uid).updateChildren(data)
                             }
                             MarkerType.Other -> {
                                 val data = HashMap<String, Any>()
                                 data["postedPoints"] = user.postedPoints + 1;
-                                db.reference.child(auth.currentUser!!.uid).updateChildren(data)
+                                db.reference.child("users").child(auth.currentUser!!.uid).updateChildren(data)
                             }
                         }
                     }
-                    navController.navigate(R.id.action_addMarker_to_mapsFragment)
                 }
+                navController.navigate(R.id.action_addMarker_to_mapsFragment)
             }
         }
         val btnPhoto = view.findViewById<Button>(R.id.btnImage)

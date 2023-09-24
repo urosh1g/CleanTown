@@ -6,12 +6,12 @@ enum class MarkerType {
 }
 
 data class Marker(
-    val id: String,
-    val userId: String,
-    val latitude: Double,
-    val longitude: Double,
-    val title: String,
-    val description: String,
-    val type: MarkerType,
-    val photo: String
+    val id: String = "",
+    val userId: String = "",
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0,
+    val title: String = "",
+    val description: String = "",
+    val type: MarkerType = MarkerType.Other,
+    val photo: String = ""
 )

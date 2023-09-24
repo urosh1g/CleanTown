@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_mapsFragment_to_addMarker"
             app:destination="@id/addMarker" />
+        <action
+            android:id="@+id/action_mapsFragment_to_markerView"
+            app:destination="@id/markerView" />
     </fragment>
 
     <fragment
@@ -58,6 +61,15 @@
         tools:layout="@layout/fragment_add_marker" >
         <action
             android:id="@+id/action_addMarker_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/markerView"
+        android:name="elfak.urosh.cleantown.MarkerView"
+        android:label="fragment_marker_view"
+        tools:layout="@layout/fragment_marker_view" >
+        <action
+            android:id="@+id/action_markerView_to_mapsFragment"
             app:destination="@id/mapsFragment" />
     </fragment>
 </navigation>

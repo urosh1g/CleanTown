@@ -16,8 +16,17 @@ class UserListViewModel : ViewModel() {
     private val _liveUsers = MutableLiveData<List<User>>()
     val users : LiveData<List<User>> = _liveUsers
 
+    fun enterEvent() {
+        val userId = auth.currentUser!!.uid
+        db.reference.child("users").child(userId).get().addOnSuccessListener {
+            val user = it.getValue(User::class.java)!!
+            val userInfo = HashMap<String, Any>()
+            userInfo["eventPoints"] = user.eventPoints + 5
+            db.reference.child("users").child(userId).updateChildren(userInfo)
+        }
+    }
     fun getUsers() {
-        db.reference.get().addOnSuccessListener {
+        db.reference.child("users").get().addOnSuccessListener {
             if( it.exists() ) {
                 val users = mutableListOf<User>()
                 for (userSnapshot in it.children) {

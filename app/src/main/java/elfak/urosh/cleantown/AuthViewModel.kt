@@ -36,7 +36,7 @@ class AuthViewModel : ViewModel() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     _liveAuthState.value = AuthState.Success
-                    db.reference.child(auth.currentUser!!.uid).get().addOnSuccessListener {
+                    db.reference.child("users").child(auth.currentUser!!.uid).get().addOnSuccessListener {
                         if (it.exists()) {
                             val user = it.getValue(User::class.java)
                             _liveUser.value = user!!
@@ -70,7 +70,7 @@ class AuthViewModel : ViewModel() {
                                 user["eventPoints"] = 0
                                 val currentuser = User(auth.currentUser!!.uid, email.split('@')[0],0, 0, uri.toString() )
                                 _liveUser.value = currentuser
-                                db.reference.child(userId).setValue(user)
+                                db.reference.child("users").child(userId).setValue(user)
                             }
                         }
                         .addOnFailureListener { ex ->

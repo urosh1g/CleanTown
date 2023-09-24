@@ -29,7 +29,7 @@ class UserProfile : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_user_profile, container, false)
         val userId = auth.currentUser!!.uid
-        val user = db.reference.child(userId).get().addOnSuccessListener {
+        val user = db.reference.child("users").child(userId).get().addOnSuccessListener {
             if (it.exists()) {
                 val image = view.findViewById<ImageView>(R.id.imageView)
                 val username = view.findViewById<TextView>(R.id.textViewUsername)
